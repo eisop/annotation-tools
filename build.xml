@@ -9,7 +9,7 @@
     <property name="afu" location="annotation-file-utilities"/>
 
     <target name="all" description="Compile, run Javadoc, and run tests"
-	depends="compile,javadoc,test"/>
+	depends="compile,javadoc"/>
 
     <target name="compile" description="Compile all annotation tools"
         depends="compile-all"/>
@@ -60,6 +60,7 @@
     <!-- TODO: Add asmx tests when they work -->
     <target name="test-all"
            depends="test-scene-lib,test-afu"/>
+
     <target name="clean-all">
       <ant dir="${asmx}" target="clean"/>
       <ant dir="${scene-lib}" target="clean"/>

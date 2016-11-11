@@ -178,7 +178,7 @@
                executable="${annotations-compiler}/build/bin/javac">
             <src refid="sourcepath"/>
             <src refid="testpath"/>
-            <compilerarg value="-Xbootclasspath/p:${toString:libpath}"/>
+            <!--<compilerarg value="-Xbootclasspath/p:${toString:libpath}"/> -->
             <!-- To prevent a cyclic dependency with the Checker
                  Framework, ignore type annotations in comments here.
                  A separate target could be added to check the qualifiers
