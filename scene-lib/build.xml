@@ -178,6 +178,10 @@
                executable="${annotations-compiler}/build/bin/javac">
             <src refid="sourcepath"/>
             <src refid="testpath"/>
+            <compilerarg line="--module-path=${junit}:${asmx}/bin:${annotation-tools}/annotation-file-utilities/lib/"/>
+            <compilerarg line="--add-exports jdk.compiler/com.sun.tools.javac.code=annotationtools.scenelib"/>
+            <compilerarg line="--add-exports jdk.compiler/com.sun.tools.classfile=annotationtools.scenelib"/>
+
             <!--<compilerarg value="-Xbootclasspath/p:${toString:libpath}"/> -->
             <!-- To prevent a cyclic dependency with the Checker
                  Framework, ignore type annotations in comments here.
