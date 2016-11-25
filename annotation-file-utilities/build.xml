@@ -507,16 +507,22 @@
         Hack for Windows:  use "java com.sun.tools.javac.Main" rather than
         "javac".
       -->
+      <echo message="${annotations-compiler}/build/modules"/>
       <java fork="true"
             failonerror="true"
             classname="com.sun.tools.javac.Main">
           <!-- Option no longer exists in JDK 9.
           <jvmarg line="-Xbootclasspath/p:${annotations-compiler-absolute}/build/javac.jar"/>
           -->
-          <arg line="--module-path=${annotation-tools}/annotation-file-utilities/lib/:${scene-lib}/bin:${asmx}/bin:bin"/>
+          <arg line="--upgrade-module-path=${annotations-compiler}/build/modules"/>
+          <arg line="--module-path=${junit}:${annotation-tools}/annotation-file-utilities/lib/:${scene-lib}/bin:${asmx}/bin:bin"/>
           <arg line="--add-exports jdk.compiler/com.sun.tools.javac.main=annotationtools.afu"/>
           <arg line="--add-exports jdk.compiler/com.sun.tools.javac.code=annotationtools.afu"/>
           <arg line="--add-exports jdk.compiler/com.sun.tools.javac.tree=annotationtools.afu"/>
+          <arg line="--add-exports jdk.compiler/com.sun.tools.javac.util=annotationtools.afu"/>
+          <arg line="--add-exports jdk.compiler/com.sun.tools.javac.api=annotationtools.afu"/>
+
+          <arg value="-Xdiags:verbose"/>
 
           <arg value="-Xlint:-options"/>
           <arg value="-Werror"/>
