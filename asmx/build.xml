@@ -128,7 +128,6 @@
         <pathelement location="${out.tmp}"/>
       </classpath>
       <compilerarg line="--add-exports jdk.compiler/com.sun.tools.javac.code=annotationtools.asmx"/>
-
       <src path="${src}"/>
       <include name="**/*.java"/>
     </javac>
