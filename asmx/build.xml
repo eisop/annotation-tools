@@ -126,9 +126,7 @@
     <javac destdir="${out.tmp}" debug="on" includeantruntime="false">
       <classpath>
         <pathelement location="${out.tmp}"/>
-        <!--pathelement path="${annotations-compiler}/build/javac.jar"/-->
       </classpath>
-      <compilerarg line="--upgrade-module-path=${annotations-compiler}/build/modules"/>
       <compilerarg line="--add-exports jdk.compiler/com.sun.tools.javac.code=annotationtools.asmx"/>
 
       <src path="${src}"/>

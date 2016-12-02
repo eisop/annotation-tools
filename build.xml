@@ -60,7 +60,6 @@
     <!-- TODO: Add asmx tests when they work -->
     <target name="test-all"
            depends="test-scene-lib,test-afu"/>
-
     <target name="clean-all">
       <ant dir="${asmx}" target="clean"/>
       <ant dir="${scene-lib}" target="clean"/>

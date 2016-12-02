@@ -116,7 +116,6 @@
             <pathelement location="${annotation-tools}/annotation-file-utilities/lib/plume.jar"/>
             <pathelement location="${annotation-tools}/annotation-file-utilities/lib/guava-15.0.jar"/>
             <!-- remainder only for repository version -->
-            <!--pathelement location="${annotations-compiler}/build/javac.jar"/-->
             <pathelement location="bin"/>
         </path>
     </target>
@@ -176,15 +175,12 @@
                executable="${annotations-compiler}/build/bin/javac">
             <src refid="sourcepath"/>
             <src refid="testpath"/>
-            <compilerarg line="--module-path=${junit}:${asmx}/bin:${annotation-tools}/annotation-file-utilities/lib/"/>
+            <compilerarg line="--module-path=${module-path}"/>
             <compilerarg line="--add-exports jdk.compiler/com.sun.tools.javac.code=annotationtools.scenelib,annotationtools.asmx"/>
             <compilerarg line="--add-exports jdk.compiler/com.sun.tools.javac.tree=annotationtools.scenelib"/>
             <compilerarg line="--add-exports jdk.compiler/com.sun.tools.javac.main=annotationtools.scenelib"/>
             <compilerarg line="--add-exports jdk.compiler/com.sun.tools.javac.util=annotationtools.scenelib"/>
-
             <compilerarg line="--add-exports jdk.jdeps/com.sun.tools.classfile=annotationtools.scenelib"/>
-
-            <!--<compilerarg value="-Xbootclasspath/p:${toString:libpath}"/> -->
             <!-- To prevent a cyclic dependency with the Checker
                  Framework, ignore type annotations in comments here.
                  A separate target could be added to check the qualifiers
@@ -193,7 +189,6 @@
             <compilerarg value="-Xlint:-options"/>
             <compilerarg value="-Werror"/>
             <compilerarg value="-version"/>
-
             <!-- TODO: how can we include just these two files in testpath? -->
             <compilerarg value="test/annotations/tests/classfile/AnnotationsTest.java"/>
             <compilerarg value="test/annotations/tests/classfile/AnnotationVerifier.java"/>

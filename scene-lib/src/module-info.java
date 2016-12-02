@@ -11,7 +11,7 @@ module annotationtools.scenelib {
 	requires plume;
 	requires guava;
 	requires annotationtools.asmx;
-	//requires public jdk.jdeps;
+	requires jdk.jdeps;
 	requires jdk.compiler;
 	requires java.logging;
 }
