@@ -209,12 +209,6 @@
         <exclude name="META-INF/" />
       </patternset>
     </unjar>
-    <unjar src="${annotations-compiler}/build/javac.jar" dest="${temp-jarfile}">
-      <patternset>
-        <include name="**/*.class"/>
-        <exclude name="META-INF/" />
-      </patternset>
-    </unjar>
 
     <!-- Actually create a single .jar file of all the class files,
          scripts and documentation -->
@@ -517,7 +511,7 @@
           <arg line="--upgrade-module-path=${annotations-compiler}/build/modules"/>
           <arg line="--module-path=${junit}:${annotation-tools}/annotation-file-utilities/lib/:${scene-lib}/bin:${asmx}/bin:bin"/>
           <arg line="--add-exports jdk.compiler/com.sun.tools.javac.main=annotationtools.afu"/>
-          <arg line="--add-exports jdk.compiler/com.sun.tools.javac.code=annotationtools.afu"/>
+          <arg line="--add-exports jdk.compiler/com.sun.tools.javac.code=annotationtools.afu,annotationtools.scenelib"/>
           <arg line="--add-exports jdk.compiler/com.sun.tools.javac.tree=annotationtools.afu"/>
           <arg line="--add-exports jdk.compiler/com.sun.tools.javac.util=annotationtools.afu"/>
           <arg line="--add-exports jdk.compiler/com.sun.tools.javac.api=annotationtools.afu"/>
