@@ -109,15 +109,15 @@
         <path id="javadoc-sourcepath">
             <pathelement location="src"/>
         </path>
-
+<!--
         <path id="libpath">
             <pathelement location="${asmx}/bin"/>
             <pathelement location="${junit}"/>
             <pathelement location="${annotation-tools}/annotation-file-utilities/lib/plume.jar"/>
             <pathelement location="${annotation-tools}/annotation-file-utilities/lib/guava-15.0.jar"/>
-            <!-- remainder only for repository version -->
             <pathelement location="bin"/>
         </path>
+    -->
     </target>
 
     <target name="init" depends="init-properties, init-dependencies, init-paths"/>
@@ -214,7 +214,7 @@
             <!-- Option no longer exists in JDK 9.
             <jvmarg value="-Xbootclasspath/p:${toString:libpath}"/>
             -->
-            <classpath refid="libpath"/>
+            <!--classpath refid="libpath"/-->
             <formatter type="plain"/>
             <test name="annotations.tests.executable.TestSceneLib" todir="reports"/>
             <assertions>
@@ -226,8 +226,8 @@
     <target name="test-classfile" depends="init, bin">
         <mkdir dir="reports"/>
         <junit printsummary="withOutAndErr" showoutput="true" fork="yes" dir="." haltonerror="yes" haltonfailure="yes">
-            <jvmarg value="-Xbootclasspath/p:${toString:libpath}"/>
-            <classpath refid="libpath"/>
+            <!--jvmarg value="-Xbootclasspath/p:${toString:libpath}"/-->
+            <!--classpath refid="libpath"/-->
             <formatter type="plain"/>
             <test name="annotations.tests.classfile.AnnotationsTest" todir="reports"/>
             <assertions>
@@ -246,8 +246,7 @@
              but there are other uses of ${scene-lib} in this target.
         -->
         <java classname="annotations.tests.executable.Example"
-              output="${scene-lib}/test/annotations/tests/executable/example-stdout.jaif"
-              classpathref="libpath">
+              output="${scene-lib}/test/annotations/tests/executable/example-stdout.jaif">
             <arg value="${scene-lib}/test/annotations/tests/executable/example-input.jaif" />
             <arg value="foo.Bar" />
             <arg value="${scene-lib}/test/annotations/tests/executable/example-output.jaif" />
@@ -293,7 +292,6 @@
     <target name="javadoc" depends="javadoc-clean, init"
        description="Generate Javadoc API documentation">
         <javadoc sourcepathref="javadoc-sourcepath"
-                classpathref="libpath"
                 packagenames="*"
                 excludepackagenames=""
                 Overview="overview.html"

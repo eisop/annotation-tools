@@ -9,7 +9,7 @@ module annotationtools.scenelib {
 	exports annotations.field;
 	requires junit;
 	requires plume;
-	requires guava;
+	requires public guava;
 	requires annotationtools.asmx;
 	requires jdk.jdeps;
 	requires jdk.compiler;

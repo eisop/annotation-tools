@@ -78,21 +78,6 @@
     <fileset dir="src" id="src-files">
       <include name="**/*.java"/>
     </fileset>
-
-    <path id="libpath">
-      <!-- alternate for distribution:
-      <pathelement location="${annotations-compiler}/bin"/>
-      -->
-      <pathelement location="${annotation-tools}/annotation-file-utilities/lib/plume.jar"/>
-      <pathelement location="${annotation-tools}/annotation-file-utilities/lib/guava-15.0.jar"/>
-      <pathelement location="${scene-lib}/bin"/>
-      <pathelement location="${asmx}/bin"/>
-      <!-- needed for optionsdoc target -->
-      <pathelement location="bin"/>
-      <!-- additional for distribution:
-      <pathelement location="${jre1.6.0}"/>
-      -->
-    </path>
   </target>
 
   <path id="javadoc-sourcepath">
@@ -105,7 +90,6 @@
 
   <target name="javadoc" depends="javadoc-clean, init">
       <javadoc sourcepathref="javadoc-sourcepath"
-          classpathref="libpath"
           failonerror="true"
           packagenames="*"
           destdir="javadoc"
@@ -119,8 +103,6 @@
   <target name="optionsdoc" depends="javadoc, init">
     <javadoc sourcepathref="javadoc-sourcepath"
         sourcefiles="src/annotator/Main.java"
-        classpathref="libpath"
-        docletpathref="libpath"
         failonerror="true"
         >
       <doclet name="plume.OptionsDoclet">
@@ -132,8 +114,6 @@
 
     <javadoc sourcepathref="javadoc-sourcepath"
         sourcefiles="src/annotator/Main.java"
-        classpathref="libpath"
-        docletpathref="libpath"
         failonerror="true"
         >
       <doclet name="plume.OptionsDoclet">
@@ -155,7 +135,7 @@
       <uptodate property="scene-lib.bin.uptodate" targetfile="annotation-file-utilities.jar">
         <srcfiles dir="${scene-lib}/bin" excludes="annotations-expected/**,annotations/tests/**"/>
       </uptodate>
-      <uptodate property="annotations-compiler.uptodate" targetfile="annotation-file-utilities.jar" srcfile="${annotations-compiler}/build/javac.jar"/>
+      <!--uptodate property="annotations-compiler.uptodate" targetfile="annotation-file-utilities.jar" srcfile="${annotations-compiler}/build/javac.jar"/-->
       <uptodate property="plume.uptodate" targetfile="annotation-file-utilities.jar" srcfile="lib/plume.jar"/>
       <uptodate property="google-collect.uptodate" targetfile="annotation-file-utilities.jar" srcfile="lib/guava-15.0.jar"/>
 
@@ -555,7 +535,6 @@
       <compilerarg value="-implicit:class"/>
       <compilerarg line="-Awarns -Xmaxwarns 10000"/>
       <classpath>
-        <path refid="libpath"/>
         <pathelement location="${env.annotations}/checker/dist/checker.jar"/>
       </classpath>
     </javac>
