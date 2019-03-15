@@ -79,6 +79,7 @@ bin/annotator/tests/%.class: %.java
 # be better to fail earlier.
 %.output: %.jaif %.java bin/annotator/tests/%.class ../../bin ../../annotation-file-utilities-all.jar
 	-$(JAVA) \
+		-Xbootclasspath/p:../../annotation-file-utilities-all.jar \
 	    -cp ../../bin:../../annotation-file-utilities-all.jar:bin \
 	    annotator.Main \
 	    ${DEBUG} \

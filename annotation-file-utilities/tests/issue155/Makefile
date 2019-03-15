@@ -54,6 +54,7 @@ results: ../bin/VerifyDiffs.class
 .PRECIOUS: %.output
 %.output: %.jaif %.java ../../bin ../../annotation-file-utilities-all.jar
 	$(JAVA) \
+	-Xbootclasspath/p:../../annotation-file-utilities-all.jar \
 	-cp ../../bin:../bin:../../annotation-file-utilities-all.jar:bin \
 	annotator.Main \
 	${DEBUG} \
