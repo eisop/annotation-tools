@@ -59,7 +59,6 @@ compile : $(SRC)
 # Actually runs the annotator to create the annotated java file.
 output: compile $(JAIF) ../../bin $(AFU_JARS)
 	$(JAVA) \
-	-Xbootclasspath/p:../../annotation-file-utilities-all.jar \
 	-cp ../../bin:../../annotation-file-utilities-all.jar:bin \
 	annotator.Main \
 	${DEBUG} \

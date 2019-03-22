@@ -63,8 +63,7 @@ compile : $(SRC)
 # before the stock javac classes on the bootclasspath
 output: compile $(JAIF) ../../bin $(AFU_JARS)
 	$(JAVA) \
-        -Xbootclasspath/p:../../bin:../../annotation-file-utilities-all.jar \
-	-cp bin \
+	-cp ../../annotation-file-utilities-all.jar \
 	annotator.Main \
 	${DEBUG} \
 	--abbreviate=true \
