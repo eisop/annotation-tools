@@ -323,7 +323,7 @@ public class ClassReader {
     /**
      * Copies the bootstrap method data into the given {@link ClassWriter}.
      * Should be called before the {@link #accept(ClassVisitor,int)} method.
-     * 
+     *
      * @param classWriter
      *            the {@link ClassWriter} to copy bootstrap methods into.
      */
@@ -629,7 +629,7 @@ public class ClassReader {
                 v += 2;
                 for (; j > 0; --j) {
                     v = readTypeAnnotationValues(v,
-                            c, classVisitor, i != 0);
+                            c, classVisitor, i != 0, false);
                 }
             }
         }
@@ -748,7 +748,7 @@ public class ClassReader {
                     v += 2;
                     for(; k > 0; --k) {
                         v = readTypeAnnotationValues(v,
-                            c, fv, true);
+                            c, fv, true, false);
                     }
                 }
 
@@ -758,7 +758,7 @@ public class ClassReader {
                     v += 2;
                     for(; k > 0; --k) {
                         v = readTypeAnnotationValues(v,
-                            c, fv, false);
+                            c, fv, false, false);
                     }
                 }
 
@@ -940,7 +940,7 @@ public class ClassReader {
                         w += 2;
                         for (; k > 0; --k) {
                             w = readTypeAnnotationValues(w,
-                                  c, mv, j != 0);
+                                  c, mv, j != 0, true);
                         }
                     }
                 }
@@ -1145,14 +1145,14 @@ public class ClassReader {
                         w = v + 8;
                         for (; k > 0; --k) {
                             w = readTypeAnnotationValues(w,
-                                    c, mv, false);
+                                    c, mv, false, false);
                         }
                     } else if (attrName.equals("RuntimeVisibleTypeAnnotations")) {
                         k = readUnsignedShort(v + 6);
                         w = v + 8;
                         for (; k > 0; --k) {
                             w = readTypeAnnotationValues(w,
-                                    c, mv, true);
+                                    c, mv, true, false);
                         }
                     } else {
                         for (k = 0; k < attrs.length; ++k) {
@@ -1487,7 +1487,8 @@ public class ClassReader {
         int v,
         final char[] buf,
         final MemberVisitor mv,
-        final boolean visible)
+        final boolean visible,
+        final boolean is_method_extended_annotations)
     {
         // first handle
         //
@@ -1706,7 +1707,9 @@ public class ClassReader {
             v = readAnnotationValue(v, buf, name, xav);
         }
 
-        xav.visitEnd();
+        if (!(is_method_extended_annotations && target_type == TargetType.CLASS_EXTENDS)) {
+            xav.visitEnd();
+        }
         return v;
     }
 
@@ -1868,7 +1871,7 @@ public class ClassReader {
 
     /**
      * Returns the start index of the attribute_info structure of this class.
-     * 
+     *
      * @return the start index of the attribute_info structure of this class.
      */
     private int getAttributes() {
