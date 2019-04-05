@@ -1480,6 +1480,9 @@ public class ClassReader {
     *        {@link #readConst readConst}.
     * @param mv the visitor to generate the visitor that must visit the values.
     * @param visible {@code true} if the annotation is visible at runtime.
+    * @param is_method_extended_annotations {@code true} if this method is
+    *        called to read a method's extended annotations; need to be
+    *        {@code false} for all other cases.
     * @return the end offset of the annotations values.
     * @author jaimeq
     */
@@ -1707,6 +1710,9 @@ public class ClassReader {
             v = readAnnotationValue(v, buf, name, xav);
         }
 
+        // this is a workaround for
+        // https://bugs.openjdk.java.net/browse/JDK-8198945
+        // which has only been fixed in JDK 12
         if (!(is_method_extended_annotations && target_type == TargetType.CLASS_EXTENDS)) {
             xav.visitEnd();
         }
