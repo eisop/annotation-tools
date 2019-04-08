@@ -1713,6 +1713,9 @@ public class ClassReader {
         // this is a workaround for
         // https://bugs.openjdk.java.net/browse/JDK-8198945
         // which has only been fixed in JDK 12
+        // the other part of this workaround is located at
+        // https://github.com/eisop/checker-framework/blob/abdb77758e6eb2dcb9dc569ff9f34341dda8b776/framework/src/main/java/org/checkerframework/framework/util/element/MethodApplier.java#L81
+        // which is why it is TargetType.CLASS_EXTENDS here
         if (!(is_method_extended_annotations && target_type == TargetType.CLASS_EXTENDS)) {
             xav.visitEnd();
         }
