@@ -629,7 +629,7 @@ public class ClassReader {
                 v += 2;
                 for (; j > 0; --j) {
                     v = readTypeAnnotationValues(v,
-                            c, classVisitor, i != 0, false);
+                            c, classVisitor, i != 0);
                 }
             }
         }
@@ -748,7 +748,7 @@ public class ClassReader {
                     v += 2;
                     for(; k > 0; --k) {
                         v = readTypeAnnotationValues(v,
-                            c, fv, true, false);
+                            c, fv, true);
                     }
                 }
 
@@ -758,7 +758,7 @@ public class ClassReader {
                     v += 2;
                     for(; k > 0; --k) {
                         v = readTypeAnnotationValues(v,
-                            c, fv, false, false);
+                            c, fv, false);
                     }
                 }
 
@@ -939,8 +939,8 @@ public class ClassReader {
                         k = readUnsignedShort(w);
                         w += 2;
                         for (; k > 0; --k) {
-                            w = readTypeAnnotationValues(w,
-                                  c, mv, j != 0, true);
+                            w = readTypeAnnotationValuesBodies(w,
+                                  c, mv, j != 0);
                         }
                     }
                 }
@@ -1145,14 +1145,14 @@ public class ClassReader {
                         w = v + 8;
                         for (; k > 0; --k) {
                             w = readTypeAnnotationValues(w,
-                                    c, mv, false, false);
+                                    c, mv, false);
                         }
                     } else if (attrName.equals("RuntimeVisibleTypeAnnotations")) {
                         k = readUnsignedShort(v + 6);
                         w = v + 8;
                         for (; k > 0; --k) {
                             w = readTypeAnnotationValues(w,
-                                    c, mv, true, false);
+                                    c, mv, true);
                         }
                     } else {
                         for (k = 0; k < attrs.length; ++k) {
@@ -1469,7 +1469,57 @@ public class ClassReader {
         av.visitEnd();
         return v;
     }
+
    /**
+    * Reads the values and reference info of an extended annotation
+    * and makes the given visitor visit them. Should not be used for reading
+    * methods' extended annotations due to JDK-8198945; use
+    * {@link #readTypeAnnotationValuesBodies readTypeAnnotationValuesBodies}
+    * instead.
+    *
+    * @param v the start offset in {@link #b b} of the values to be read
+    *        (including the unsigned short that gives the number of values).
+    * @param buf buffer to be used to call {@link #readUTF8 readUTF8},
+    *        {@link #readClass(int,char[]) readClass} or
+    *        {@link #readConst readConst}.
+    * @param mv the visitor to generate the visitor that must visit the values.
+    * @param visible {@code true} if the annotation is visible at runtime.
+    * @return the end offset of the annotations values.
+    * @author jaimeq
+    */
+    private int readTypeAnnotationValues(
+        int v,
+        final char[] buf,
+        final MemberVisitor mv,
+        final boolean visible)
+    {
+        return readTypeAnnotationValuesHelper(v, buf, mv, visible, false);
+    }
+
+    /**
+    * This is a method for the work-around related to the bug JDK-8198945.
+    * All type annotations should be read using the original method
+    * except methods' extended annotations for which this method should be used.
+    *
+    * @param v the start offset in {@link #b b} of the values to be read
+    *        (including the unsigned short that gives the number of values).
+    * @param buf buffer to be used to call {@link #readUTF8 readUTF8},
+    *        {@link #readClass(int,char[]) readClass} or
+    *        {@link #readConst readConst}.
+    * @param mv the visitor to generate the visitor that must visit the values.
+    * @param visible {@code true} if the annotation is visible at runtime.
+    * @return the end offset of the annotations values.
+    */
+    private int readTypeAnnotationValuesBodies(
+        int v,
+        final char[] buf,
+        final MemberVisitor mv,
+        final boolean visible)
+    {
+        return readTypeAnnotationValuesHelper(v, buf, mv, visible, true);
+    }
+
+    /**
     * Reads the values and reference info of an extended annotation
     * and makes the given visitor visit them.
     *
@@ -1480,18 +1530,18 @@ public class ClassReader {
     *        {@link #readConst readConst}.
     * @param mv the visitor to generate the visitor that must visit the values.
     * @param visible {@code true} if the annotation is visible at runtime.
-    * @param is_method_extended_annotations {@code true} if this method is
-    *        called to read a method's extended annotations; need to be
+    * @param isMethodBody {@code true} if this method is
+    *        called to read a method's extended annotations; needs to be
     *        {@code false} for all other cases.
     * @return the end offset of the annotations values.
     * @author jaimeq
     */
-    private int readTypeAnnotationValues(
+    private int readTypeAnnotationValuesHelper(
         int v,
         final char[] buf,
         final MemberVisitor mv,
         final boolean visible,
-        final boolean is_method_extended_annotations)
+        final boolean isMethodBody)
     {
         // first handle
         //
@@ -1715,8 +1765,8 @@ public class ClassReader {
         // which has only been fixed in JDK 12
         // the other part of this workaround is located at
         // https://github.com/eisop/checker-framework/blob/abdb77758e6eb2dcb9dc569ff9f34341dda8b776/framework/src/main/java/org/checkerframework/framework/util/element/MethodApplier.java#L81
-        // which is why it is TargetType.CLASS_EXTENDS here
-        if (!(is_method_extended_annotations && target_type == TargetType.CLASS_EXTENDS)) {
+        // which explains why it is TargetType.CLASS_EXTENDS here
+        if (!(isMethodBody && target_type == TargetType.CLASS_EXTENDS)) {
             xav.visitEnd();
         }
         return v;
