@@ -1760,12 +1760,13 @@ public class ClassReader {
             v = readAnnotationValue(v, buf, name, xav);
         }
 
-        // this is a workaround for
+        // Work around
         // https://bugs.openjdk.java.net/browse/JDK-8198945
-        // which has only been fixed in JDK 12
-        // the other part of this workaround is located at
+        // which has only been fixed in JDK 12, by not running the
+        // visitor if an invalid CLASS_EXTENDS is found in a method body.
+        // A similar workaround is located at
         // https://github.com/eisop/checker-framework/blob/abdb77758e6eb2dcb9dc569ff9f34341dda8b776/framework/src/main/java/org/checkerframework/framework/util/element/MethodApplier.java#L81
-        // which explains why it is TargetType.CLASS_EXTENDS here
+        // which explains why it is TargetType.CLASS_EXTENDS.
         if (!(isMethodBody && target_type == TargetType.CLASS_EXTENDS)) {
             xav.visitEnd();
         }
