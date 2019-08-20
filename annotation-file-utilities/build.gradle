@@ -40,6 +40,7 @@ sourceSets {
         exclude("**/*.java")
     }
 }
+
 configurations {
     javacJar
 }
@@ -160,6 +161,7 @@ test {
 
     }
 }
+
 task testExample(dependsOn: compileTestJava, group: 'Verification') {
     description 'Run the scene-lib example test.'
     doLast {
@@ -230,7 +232,6 @@ task getPlumeBib() {
         }
     }
 }
-
 
 task makeAnnotationFileFormat(dependsOn: getPlumeBib) {
     description 'Make documentation: annotation-file-format.{html,pdf}.'
