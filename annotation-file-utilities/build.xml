@@ -14,7 +14,6 @@
       message="Local build.properites file is missing."/>
 
     <property file="build.properties"/>
-
   </target>
 
   <macrodef name="update">
