@@ -65,7 +65,7 @@ dependencies {
     }
     implementation 'org.plumelib:bcel-util:1.1.12'
     if (JavaVersion.current() == JavaVersion.VERSION_1_8) {
-        implementation 'org.plumelib:options:1.0.5'
+        implementation 'org.plumelib:options:2.0.0'
     } else {
         implementation 'org.plumelib:options:2.0.0'
     }
