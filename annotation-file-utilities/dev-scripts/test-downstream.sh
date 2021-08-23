@@ -23,7 +23,7 @@ else
 fi
 
 # checker-framework and its downstream tests
-"/tmp/$USER/plume-scripts/git-clone-related" typetools checker-framework "${CHECKERFRAMEWORK}"
+"/tmp/$USER/plume-scripts/git-clone-related" eisop checker-framework "${CHECKERFRAMEWORK}"
 (cd "${CHECKERFRAMEWORK}" && checker/bin-devel/build.sh)
 
 (cd "${CHECKERFRAMEWORK}/checker" && ../gradlew ainferTest)

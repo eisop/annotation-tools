@@ -22,7 +22,7 @@ else
   mkdir -p "/tmp/$USER" && git -C "/tmp/$USER" clone --depth 1 -q https://github.com/plume-lib/plume-scripts.git
 fi
 
-"/tmp/$USER/plume-scripts/git-clone-related" typetools checker-framework "${CHECKERFRAMEWORK}"
+"/tmp/$USER/plume-scripts/git-clone-related" eisop checker-framework "${CHECKERFRAMEWORK}"
 (cd "${CHECKERFRAMEWORK}" && checker/bin-devel/build.sh)
 
 (cd "${AFU}" && ./gradlew checkSignature)

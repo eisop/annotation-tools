@@ -47,7 +47,7 @@ if [[ "${GROUP}" == "typecheck" || "${GROUP}" == "all" ]]; then
   if [ -z "${CHECKERFRAMEWORK}" ] ; then
     CHECKERFRAMEWORK=$(realpath ../checker-framework)
     export CHECKERFRAMEWORK
-    /tmp/plume-scripts/git-clone-related typetools checker-framework "${CHECKERFRAMEWORK}"
+    /tmp/plume-scripts/git-clone-related eisop checker-framework "${CHECKERFRAMEWORK}"
     (cd "${CHECKERFRAMEWORK}" && ./.build-without-test.sh downloadjdk)
   fi
 
@@ -71,10 +71,10 @@ fi
 
 if [[ "${GROUP}" == "downstream" || "${GROUP}" == "all" ]]; then
     # checker-framework and its downstream tests
-    /tmp/plume-scripts/git-clone-related typetools checker-framework
+    /tmp/plume-scripts/git-clone-related eisop checker-framework
     (cd ../checker-framework/framework && ../gradlew ainferTest)
 
-    # /tmp/plume-scripts/git-clone-related typetools checker-framework-inference
+    # /tmp/plume-scripts/git-clone-related eisop checker-framework-inference
     # (cd ../checker-framework-inference && ./.build.sh)
 fi
 

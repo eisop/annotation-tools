@@ -23,7 +23,7 @@
     <target name="checkout-annotation-tools" depends="init">
         <exec dir="${builddir}" executable="git" failonerror="true">
             <arg value="clone"/>
-            <arg value="https://github.com/typetools/annotation-tools.git"/>
+            <arg value="https://github.com/eisop/annotation-tools.git"/>
             <arg value="annotation-tools"/>
         </exec>
     </target>
@@ -31,7 +31,7 @@
     <target name="checkout-checker-framework" depends="init">
         <exec dir="${builddir}" executable="git" failonerror="true">
             <arg value="clone"/>
-            <arg value="https://github.com/typetools/checker-framework.git"/>
+            <arg value="https://github.com/eisop/checker-framework.git"/>
             <arg value="checker-framework"/>
         </exec>
     </target>
