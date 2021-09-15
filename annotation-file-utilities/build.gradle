@@ -252,7 +252,7 @@ task cleanTestAnnotator(type: Exec) {
 ext.plumeBibHome = "${projectDir}/plume-bib"
 
 task getPlumeBib() {
-    description 'Obtain or update the run-google-java-format scripts.'
+    description 'Obtain or update the plume-bib repository.'
     if (file(plumeBibHome).exists()) {
         exec {
             workingDir plumeBibHome
@@ -731,7 +731,7 @@ task getCodeFormatScripts() {
         exec {
             workingDir "${formatScriptsHome}/../"
             executable 'git'
-            args = ['clone', '-q', '--depth', '1', 'https://github.com/plume-lib/run-google-java-format.git', '.run-google-java-format']
+            args = ['clone', '-q', '--depth', '1', 'https://github.com/eisop-plume-lib/run-google-java-format.git', '.run-google-java-format']
         }
     }
 }
