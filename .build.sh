@@ -71,8 +71,9 @@ fi
 
 if [[ "${GROUP}" == "downstream" || "${GROUP}" == "all" ]]; then
     # checker-framework and its downstream tests
-    /tmp/plume-scripts/git-clone-related eisop checker-framework
-    (cd ../checker-framework/framework && ../gradlew ainferTest)
+# NO-AFU
+#    /tmp/plume-scripts/git-clone-related eisop checker-framework
+#    (cd ../checker-framework/framework && ../gradlew ainferTest)
 
     # /tmp/plume-scripts/git-clone-related eisop checker-framework-inference
     # (cd ../checker-framework-inference && ./.build.sh)
