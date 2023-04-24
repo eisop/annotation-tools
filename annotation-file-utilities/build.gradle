@@ -7,7 +7,7 @@ buildscript {
             // Code formatting; defines targets "spotlessApply" and "spotlessCheck".
             // https://github.com/diffplug/spotless/tags ; see tags starting "gradle/"
             // Only works on JDK 11+.
-            classpath 'com.diffplug.spotless:spotless-plugin-gradle:6.16.0'
+            classpath 'com.diffplug.spotless:spotless-plugin-gradle:6.18.0'
         }
     }
 }
@@ -205,7 +205,6 @@ test {
                     "Skipped: ${result.skippedTestCount}, " +
                     "Time elapsed: ${seconds} sec\n"
         }
-
     }
 }
 task testExample(dependsOn: compileTestJava, group: 'Verification') {
