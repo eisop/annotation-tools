@@ -49,7 +49,6 @@ jobs:
   container: wmdietl/cf-ubuntu-jdk8:latest
   dependsOn:
     - build_without_test_jdk8
-    - test_jdk17
     - canary_jobs
   steps:
   - checkout: self
@@ -62,7 +61,6 @@ jobs:
   container: wmdietl/cf-ubuntu-jdk8:latest
   dependsOn:
     - build_without_test_jdk8
-    - typecheck_jdk17
     - canary_jobs
   steps:
   - checkout: self
@@ -75,7 +73,6 @@ jobs:
   container: wmdietl/cf-ubuntu-jdk8-plus:latest
   dependsOn:
     - build_without_test_jdk8
-    - misc_jdk17
     - canary_jobs
   steps:
   - checkout: self
@@ -88,7 +85,6 @@ jobs:
   container: wmdietl/cf-ubuntu-jdk8:latest
   dependsOn:
     - build_without_test_jdk8
-    - downstream_jdk17
     - canary_jobs
   steps:
   - checkout: self
@@ -114,7 +110,6 @@ jobs:
   container: wmdietl/cf-ubuntu-jdk11:latest
   dependsOn:
     - build_without_test_jdk11
-    - test_jdk17
     - canary_jobs
   steps:
   - checkout: self
@@ -127,7 +122,6 @@ jobs:
   container: wmdietl/cf-ubuntu-jdk11:latest
   dependsOn:
     - build_without_test_jdk11
-    - typecheck_jdk17
     - canary_jobs
   steps:
   - checkout: self
@@ -140,7 +134,6 @@ jobs:
   container: wmdietl/cf-ubuntu-jdk11-plus:latest
   dependsOn:
     - build_without_test_jdk11
-    - misc_jdk17
     - canary_jobs
   steps:
   - checkout: self
@@ -153,7 +146,6 @@ jobs:
   container: wmdietl/cf-ubuntu-jdk11:latest
   dependsOn:
     - build_without_test_jdk11
-    - downstream_jdk17
     - canary_jobs
   steps:
   - checkout: self
@@ -220,11 +212,8 @@ jobs:
     vmImage: 'ubuntu-latest'
   container: wmdietl/cf-ubuntu-jdk-latest:latest
   dependsOn:
-    - build_without_test_jdk11
-    - test_jdk11
-    - typecheck_jdk11
-    - misc_jdk11
-    - downstream_jdk11
+    - build_without_test_jdk17
+    - canary_jobs
   steps:
   - checkout: self
     fetchDepth: 25
@@ -235,11 +224,8 @@ jobs:
     vmImage: 'ubuntu-latest'
   container: wmdietl/cf-ubuntu-jdk-latest:latest
   dependsOn:
-    - build_without_test_jdk11
-    - test_jdk11
-    - typecheck_jdk11
-    - misc_jdk11
-    - downstream_jdk11
+    - build_without_test_jdk_latest
+    - canary_jobs
   steps:
   - checkout: self
     fetchDepth: 25
@@ -250,11 +236,8 @@ jobs:
     vmImage: 'ubuntu-latest'
   container: wmdietl/cf-ubuntu-jdk-latest:latest
   dependsOn:
-    - build_without_test_jdk11
-    - test_jdk11
-    - typecheck_jdk11
-    - misc_jdk11
-    - downstream_jdk11
+    - build_without_test_jdk_latest
+    - canary_jobs
   steps:
   - checkout: self
     fetchDepth: 25
@@ -265,11 +248,8 @@ jobs:
     vmImage: 'ubuntu-latest'
   container: wmdietl/cf-ubuntu-jdk-latest-plus:latest
   dependsOn:
-    - build_without_test_jdk11
-    - test_jdk11
-    - typecheck_jdk11
-    - misc_jdk11
-    - downstream_jdk11
+    - build_without_test_jdk_latest
+    - canary_jobs
   steps:
   - checkout: self
     fetchDepth: 25
@@ -280,11 +260,8 @@ jobs:
     vmImage: 'ubuntu-latest'
   container: wmdietl/cf-ubuntu-jdk-latest:latest
   dependsOn:
-    - build_without_test_jdk11
-    - test_jdk11
-    - typecheck_jdk11
-    - misc_jdk11
-    - downstream_jdk11
+    - build_without_test_jdk_latest
+    - canary_jobs
   steps:
   - checkout: self
     fetchDepth: 25
@@ -309,7 +286,6 @@ jobs:
   container: wmdietl/cf-ubuntu-jdk-next:latest
   dependsOn:
     - build_without_test_jdk_next
-    - test_jdk17
     - canary_jobs
   steps:
   - checkout: self
@@ -322,7 +298,6 @@ jobs:
   container: wmdietl/cf-ubuntu-jdk-next:latest
   dependsOn:
     - build_without_test_jdk_next
-    - typecheck_jdk17
     - canary_jobs
   steps:
   - checkout: self
@@ -335,7 +310,6 @@ jobs:
   container: wmdietl/cf-ubuntu-jdk-next-plus:latest
   dependsOn:
     - build_without_test_jdk_next
-    - misc_jdk17
     - canary_jobs
   steps:
   - checkout: self
@@ -348,7 +322,6 @@ jobs:
   container: wmdietl/cf-ubuntu-jdk-next:latest
   dependsOn:
     - build_without_test_jdk_next
-    - downstream_jdk17
     - canary_jobs
   steps:
   - checkout: self
