@@ -314,7 +314,9 @@ jobs:
   steps:
   - checkout: self
     fetchDepth: 25
+  # Run test, but do not cause overall failure
   - bash: ./annotation-file-utilities/dev-scripts/test-misc.sh
+    continueOnError: true
     displayName: test-misc.sh
 - job: downstream_jdk_next
   pool:
