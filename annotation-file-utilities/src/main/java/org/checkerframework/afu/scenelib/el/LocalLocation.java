@@ -88,12 +88,12 @@ public final class LocalLocation {
       int FLAG_RESOLVED = (Integer) FLAG_RESOLVED_FIELD.get(null);
 
       short flags = (Short) flagsField.get(startLabel);
-      flags |= FLAG_RESOLVED;
+      flags |= (short) FLAG_RESOLVED;
       flagsField.set(startLabel, flags);
       bytecodeOffsetField.set(startLabel, scopeStart);
 
       flags = (Short) flagsField.get(endLabel);
-      flags |= FLAG_RESOLVED;
+      flags |= (short) FLAG_RESOLVED;
       flagsField.set(endLabel, flags);
       bytecodeOffsetField.set(endLabel, scopeStart + scopeLength);
     } catch (Exception e) {
