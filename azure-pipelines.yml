@@ -161,6 +161,60 @@ jobs:
   - bash: ./annotation-file-utilities/dev-scripts/test-downstream.sh
     displayName: test-downstream.sh
 
+- job: build_without_test_jdk17
+  pool:
+    vmImage: 'ubuntu-latest'
+  container: wmdietl/cf-ubuntu-jdk17:latest
+  steps:
+  - checkout: self
+    fetchDepth: 25
+  - bash: ./.travis-build-without-test.sh
+    displayName: .travis-build-without-test.sh
+- job: test_jdk17
+  pool:
+    vmImage: 'ubuntu-latest'
+  container: wmdietl/cf-ubuntu-jdk-next:latest
+  dependsOn:
+    - build_without_test_jdk17
+  steps:
+  - checkout: self
+    fetchDepth: 25
+  - bash: ./annotation-file-utilities/dev-scripts/test-allTests.sh
+    displayName: test-allTests.sh
+- job: typecheck_jdk17
+  pool:
+    vmImage: 'ubuntu-latest'
+  container: wmdietl/cf-ubuntu-jdk-next:latest
+  dependsOn:
+    - build_without_test_jdk17
+  steps:
+  - checkout: self
+    fetchDepth: 25
+  - bash: ./annotation-file-utilities/dev-scripts/test-typecheck.sh
+    displayName: test-typecheck.sh
+- job: misc_jdk17
+  pool:
+    vmImage: 'ubuntu-latest'
+  container: wmdietl/cf-ubuntu-jdk-next-plus:latest
+  dependsOn:
+    - build_without_test_jdk17
+  steps:
+  - checkout: self
+    fetchDepth: 25
+  - bash: ./annotation-file-utilities/dev-scripts/test-misc.sh
+    displayName: test-misc.sh
+- job: downstream_jdk17
+  pool:
+    vmImage: 'ubuntu-latest'
+  container: wmdietl/cf-ubuntu-jdk-next:latest
+  dependsOn:
+    - build_without_test_jdk17
+  steps:
+  - checkout: self
+    fetchDepth: 25
+  - bash: ./annotation-file-utilities/dev-scripts/test-downstream.sh
+    displayName: test-downstream.sh
+
 - job: build_without_test_jdk_latest
   pool:
     vmImage: 'ubuntu-latest'
@@ -237,63 +291,10 @@ jobs:
   - bash: ./annotation-file-utilities/dev-scripts/test-downstream.sh
     displayName: test-downstream.sh
 
-- job: build_without_test_jdk17
-  pool:
-    vmImage: 'ubuntu-latest'
-  container: wmdietl/cf-ubuntu-jdk17:latest
-  steps:
-  - checkout: self
-    fetchDepth: 25
-  - bash: ./.travis-build-without-test.sh
-    displayName: .travis-build-without-test.sh
-- job: test_jdk17
+- job: build_without_test_jdk_next
   pool:
     vmImage: 'ubuntu-latest'
   container: wmdietl/cf-ubuntu-jdk-next:latest
-  dependsOn:
-    - build_without_test_jdk17
-  steps:
-  - checkout: self
-    fetchDepth: 25
-  - bash: ./annotation-file-utilities/dev-scripts/test-allTests.sh
-    displayName: test-allTests.sh
-- job: typecheck_jdk17
-  pool:
-    vmImage: 'ubuntu-latest'
-  container: wmdietl/cf-ubuntu-jdk-next:latest
-  dependsOn:
-    - build_without_test_jdk17
-  steps:
-  - checkout: self
-    fetchDepth: 25
-  - bash: ./annotation-file-utilities/dev-scripts/test-typecheck.sh
-    displayName: test-typecheck.sh
-- job: misc_jdk17
-  pool:
-    vmImage: 'ubuntu-latest'
-  container: wmdietl/cf-ubuntu-jdk-next-plus:latest
-  dependsOn:
-    - build_without_test_jdk17
-  steps:
-  - checkout: self
-    fetchDepth: 25
-  - bash: ./annotation-file-utilities/dev-scripts/test-misc.sh
-    displayName: test-misc.sh
-- job: downstream_jdk17
-  pool:
-    vmImage: 'ubuntu-latest'
-  container: wmdietl/cf-ubuntu-jdk-next:latest
-  dependsOn:
-    - build_without_test_jdk17
-  steps:
-  - checkout: self
-    fetchDepth: 25
-  - bash: ./annotation-file-utilities/dev-scripts/test-downstream.sh
-    displayName: test-downstream.sh
-- job: build_without_test_jdk_latest
-  pool:
-    vmImage: 'ubuntu-latest'
-  container: wmdietl/cf-ubuntu-jdk-latest:latest
   dependsOn:
     - build_without_test_jdk17
     - canary_jobs
@@ -302,12 +303,12 @@ jobs:
     fetchDepth: 25
   - bash: ./.build-without-test.sh
     displayName: .build-without-test.sh
-- job: test_jdk_latest
+- job: test_jdk_next
   pool:
     vmImage: 'ubuntu-latest'
-  container: wmdietl/cf-ubuntu-jdk-latest:latest
+  container: wmdietl/cf-ubuntu-jdk-next:latest
   dependsOn:
-    - build_without_test_jdk_latest
+    - build_without_test_jdk_next
     - test_jdk17
     - canary_jobs
   steps:
@@ -315,12 +316,12 @@ jobs:
     fetchDepth: 25
   - bash: ./annotation-file-utilities/dev-scripts/test-allTests.sh
     displayName: test-allTests.sh
-- job: typecheck_jdk_latest
+- job: typecheck_jdk_next
   pool:
     vmImage: 'ubuntu-latest'
-  container: wmdietl/cf-ubuntu-jdk-latest:latest
+  container: wmdietl/cf-ubuntu-jdk-next:latest
   dependsOn:
-    - build_without_test_jdk_latest
+    - build_without_test_jdk_next
     - typecheck_jdk17
     - canary_jobs
   steps:
@@ -328,12 +329,12 @@ jobs:
     fetchDepth: 25
   - bash: ./annotation-file-utilities/dev-scripts/test-typecheck.sh
     displayName: test-typecheck.sh
-- job: misc_jdk_latest
+- job: misc_jdk_next
   pool:
     vmImage: 'ubuntu-latest'
-  container: wmdietl/cf-ubuntu-jdk-latest-plus:latest
+  container: wmdietl/cf-ubuntu-jdk-next-plus:latest
   dependsOn:
-    - build_without_test_jdk_latest
+    - build_without_test_jdk_next
     - misc_jdk17
     - canary_jobs
   steps:
@@ -341,12 +342,12 @@ jobs:
     fetchDepth: 25
   - bash: ./annotation-file-utilities/dev-scripts/test-misc.sh
     displayName: test-misc.sh
-- job: downstream_jdk_latest
+- job: downstream_jdk_next
   pool:
     vmImage: 'ubuntu-latest'
-  container: wmdietl/cf-ubuntu-jdk-latest:latest
+  container: wmdietl/cf-ubuntu-jdk-next:latest
   dependsOn:
-    - build_without_test_jdk_latest
+    - build_without_test_jdk_next
     - downstream_jdk17
     - canary_jobs
   steps:
