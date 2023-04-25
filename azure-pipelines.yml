@@ -173,7 +173,7 @@ jobs:
 - job: test_jdk17
   pool:
     vmImage: 'ubuntu-latest'
-  container: wmdietl/cf-ubuntu-jdk-next:latest
+  container: wmdietl/cf-ubuntu-jdk17:latest
   dependsOn:
     - build_without_test_jdk17
   steps:
@@ -184,7 +184,7 @@ jobs:
 - job: typecheck_jdk17
   pool:
     vmImage: 'ubuntu-latest'
-  container: wmdietl/cf-ubuntu-jdk-next:latest
+  container: wmdietl/cf-ubuntu-jdk17:latest
   dependsOn:
     - build_without_test_jdk17
   steps:
@@ -195,7 +195,7 @@ jobs:
 - job: misc_jdk17
   pool:
     vmImage: 'ubuntu-latest'
-  container: wmdietl/cf-ubuntu-jdk-next-plus:latest
+  container: wmdietl/cf-ubuntu-jdk17-plus:latest
   dependsOn:
     - build_without_test_jdk17
   steps:
@@ -206,7 +206,7 @@ jobs:
 - job: downstream_jdk17
   pool:
     vmImage: 'ubuntu-latest'
-  container: wmdietl/cf-ubuntu-jdk-next:latest
+  container: wmdietl/cf-ubuntu-jdk17:latest
   dependsOn:
     - build_without_test_jdk17
   steps:
