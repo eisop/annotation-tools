@@ -16,23 +16,30 @@ import org.plumelib.options.Options;
  * into an {@link AScene}.
  */
 public class ClassFileReader {
+  /** The AFU version string. Automatically updated by the release process. */
   public static final String INDEX_UTILS_VERSION = "Annotation File Utilities v3.39.0-eisop1";
 
+  /** The {@code ignore_bridge_methods} option. */
   @Option("-b omit annotations from bridge (compiler-created) methods")
   public static boolean ignore_bridge_methods = false;
 
+  /** The {@code help} option. */
   @Option("-h print usage information and exit")
   public static boolean help = false;
 
+  /** The {@code version} option. */
   @Option("print version information and exit")
   public static boolean version = false;
 
+  /** The {@code verbose} option. */
   @Option("print progress messages")
   public static boolean verbose = false;
 
-  private static String linesep = System.lineSeparator();
+  /** The system line separator. */
+  private static final String linesep = System.lineSeparator();
 
-  static String usage =
+  /** The usage help text. */
+  private static final String usage =
       String.join(
           linesep,
           "extract-annotations [options] class1 class2 ...",
