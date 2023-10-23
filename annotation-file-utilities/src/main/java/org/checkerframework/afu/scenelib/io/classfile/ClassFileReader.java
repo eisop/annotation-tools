@@ -16,6 +16,11 @@ import org.plumelib.options.Options;
  * into an {@link AScene}.
  */
 public class ClassFileReader {
+  /** Main class does not need to be instantiated. */
+  private ClassFileReader() {
+    throw new Error("Do not instantiate.");
+  }
+
   /** The AFU version string. Automatically updated by the release process. */
   public static final String INDEX_UTILS_VERSION = "Annotation File Utilities v3.39.0-eisop1";
 
