@@ -19,7 +19,7 @@ if [ -d "/tmp/$USER/plume-scripts" ] ; then
 else
   mkdir -p "/tmp/$USER" && git -C "/tmp/$USER" clone --filter=blob:none -q https://github.com/eisop-plume-lib/plume-scripts.git
 fi
-PLUME_SCRIPTS="/tmp/$USER/git-scripts"
+PLUME_SCRIPTS="/tmp/$USER/plume-scripts"
 
 (cd "${AFU}" && \
   TERM=dumb timeout 300 ./gradlew --write-verification-metadata sha256 help --dry-run </dev/null >/dev/null 2>&1 || \
