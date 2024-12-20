@@ -27,7 +27,7 @@ apply plugin: 'java'
 apply plugin: 'com.github.johnrengelman.shadow'
 
 group 'io.github.eisop'
-version '3.42.0-eisop4'
+version '3.42.0-eisop5'
 
 java {
     // This test is for whether the Checker Framework supports (runs under) Java 8.
