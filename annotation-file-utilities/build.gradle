@@ -627,14 +627,32 @@ task cloneAndPrepDirectoryForZipfile {
         delete "${tmpAnnotationTools}/.gitignore"
         delete "${tmpAnnotationTools}/.hg_archival.txt"
         delete "${tmpAnnotationTools}/.hgignore"
+        delete "${tmpAnnotationTools}/.build.sh"
+        delete "${tmpAnnotationTools}/.build-without-test.sh"
+        delete "${tmpAnnotationTools}/.travis.yml"
+        delete "${tmpAnnotationTools}/.travis-build.sh"
+        delete "${tmpAnnotationTools}/.travis-build-without-test.sh"
+        delete "${tmpAnnotationTools}/.git.pre-commit"
+        delete "${tmpAnnotationTools}/azure-pipelines.yml"
+        delete "${tmpAnnotationTools}/.github/"
+        delete "${tmpAnnotationTools}/annotation-file-utilities/"
         copy {
             from projectDir
-            into "${tmpAnnotationTools}/annotation-file-utilities"
+            include "LICENSE.txt"
+            include "README.md"
+        }
+        copy {
+            from projectDir
+            into "${tmpAnnotationTools}/annotation-file-utilities/dist"
+            include "annotation-file-utilities.jar"
+            include "annotation-file-utilities-all.jar"
+        }
+        copy {
+            from projectDir
+            into "${tmpAnnotationTools}/annotation-file-utilities/docs"
             include "annotation-file-format.dvi"
             include "annotation-file-format.html"
             include "annotation-file-format.pdf"
-            include "annotation-file-utilities.jar"
-            include "annotation-file-utilities-all.jar"
         }
     }
 }
