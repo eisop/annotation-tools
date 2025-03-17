@@ -15,7 +15,7 @@ buildscript {
 plugins {
     id 'java'
 
-    id 'com.gradleup.shadow' version '8.3.1'
+    id 'com.gradleup.shadow' version '8.3.6'
     id 'net.ltgt.errorprone' version '4.1.0'
 
     // To show task list as a tree, run: ./gradlew <taskname> taskTree
@@ -90,6 +90,23 @@ dependencies {
     testImplementation 'io.github.eisop:checker-qual:3.42.0-eisop5'
 }
 
+tasks.withType(JavaCompile) { compilationTask ->
+    if (compilationTask.name.startsWith('compile')) {
+        options.errorprone.enabled = isJava17orHigher
+        options.errorprone.disable(
+                // Suggestion assumes there is no overriding equals() method.
+                "NonOverridingEquals",
+                // Suggestion is incorrect when using the Checker Framework.
+                "ExtendsObject",
+                // Suggests using a class that's in Error Prone itself, not in any library for clients.
+                // It requires "import com.google.errorprone.util.ASTHelpers;", and (in build.gradle)
+                //   implementation "com.google.errorprone:error_prone_core:${errorproneVersion}"
+                // Adding that line in build.gradle causes a javac crash when running the Checker Framework.
+                "ASTHelpersSuggestions",
+                )
+    }
+}
+
 compileJava {
     if (true /* supports Java 8 */) {
         sourceCompatibility = 1.8
@@ -135,34 +152,6 @@ compileJava {
         ]
     }
     options.encoding = 'UTF-8'
-
-    options.errorprone.enabled = isJava17orHigher
-    options.errorprone.disable(
-            // Suggestion assumes there is no overriding equals() method.
-            "NonOverridingEquals",
-            // Suggestion is incorrect when using the Checker Framework.
-            "ExtendsObject",
-            // Suggests using a class that's in Error Prone itself, not in any library for clients.
-            // It requires "import com.google.errorprone.util.ASTHelpers;", and (in build.gradle)
-            //   implementation "com.google.errorprone:error_prone_core:${errorproneVersion}"
-            // Adding that line in build.gradle causes a javac crash when running the Checker Framework.
-            "ASTHelpersSuggestions",
-            )
-}
-
-compileTestJava {
-    options.errorprone.enabled = isJava17orHigher
-    options.errorprone.disable(
-            // Suggestion assumes there is no overriding equals() method.
-            "NonOverridingEquals",
-            // Suggestion is incorrect when using the Checker Framework.
-            "ExtendsObject",
-            // Suggests using a class that's in Error Prone itself, not in any library for clients.
-            // It requires "import com.google.errorprone.util.ASTHelpers;", and (in build.gradle)
-            //   implementation "com.google.errorprone:error_prone_core:${errorproneVersion}"
-            // Adding that line in build.gradle causes a javac crash when running the Checker Framework.
-            "ASTHelpersSuggestions",
-            )
 }
 
 
