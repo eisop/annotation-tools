@@ -171,7 +171,7 @@ jobs:
     fetchDepth: 25
   - bash: ./.build-without-test.sh
     displayName: .build-without-test.sh
-- job: test_jdk_next
+- job: test_jdk21
   pool:
     vmImage: 'ubuntu-latest'
   container: wmdietl/cf-ubuntu-jdk21:latest
