@@ -34,10 +34,10 @@ export SHELLOPTS
 
 set -e
 
-if [ -d "/tmp/$USER/git-scripts" ] ; then
-  (cd "/tmp/$USER/git-scripts" && (git pull -q || true)) > /dev/null 2>&1
+if [ -d "/tmp/git-scripts" ] ; then
+  (cd /tmp/git-scripts && (git pull -q || true)) > /dev/null 2>&1
 else
-  (mkdir -p "/tmp/$USER" && git -C "/tmp/$USER" clone --filter=blob:none -q https://github.com/eisop-plume-lib/git-scripts.git)
+  (cd /tmp && git clone --depth=1 -q https://github.com/eisop-plume-lib/git-scripts.git)
 fi
 
 if [[ "${GROUP}" == "test" || "${GROUP}" == "all" ]]; then
@@ -48,7 +48,7 @@ if [[ "${GROUP}" == "typecheck" || "${GROUP}" == "all" ]]; then
   if [ -z "${CHECKERFRAMEWORK}" ] ; then
     CHECKERFRAMEWORK=$(realpath ../checker-framework)
     export CHECKERFRAMEWORK
-    /tmp/$USER/git-scripts/git-clone-related eisop checker-framework "${CHECKERFRAMEWORK}"
+    /tmp/git-scripts/git-clone-related eisop checker-framework "${CHECKERFRAMEWORK}"
     (cd "${CHECKERFRAMEWORK}" && ./.build-without-test.sh downloadjdk)
   fi
 
@@ -76,11 +76,11 @@ fi
 if [[ "${GROUP}" == "downstream" || "${GROUP}" == "all" ]]; then
     # checker-framework and its downstream tests
 # NO-AFU
-#    /tmp/$USER/git-scripts/git-clone-related eisop checker-framework
+#    /tmp/git-scripts/git-clone-related eisop checker-framework
 #    (cd ../checker-framework/framework && (../gradlew --write-verification-metadata sha256 help --dry-run || (sleep 60s && ../gradlew --write-verification-metadata sha256 help --dry-run)))
 #    (cd ../checker-framework/framework && ../gradlew ainferTest)
 
-    # /tmp/$USER/git-scripts/git-clone-related eisop checker-framework-inference
+    # /tmp/git-scripts/git-clone-related eisop checker-framework-inference
     # (cd ../checker-framework-inference && ./.build.sh)
 fi
 
