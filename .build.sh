@@ -76,7 +76,7 @@ fi
 if [[ "${GROUP}" == "downstream" || "${GROUP}" == "all" ]]; then
     # checker-framework and its downstream tests
 # NO-AFU
-#    /tmp/git-scripts/git-clone-related typetools checker-framework
+#    /tmp/git-scripts/git-clone-related eisop checker-framework
 #    (cd ../checker-framework/framework && (../gradlew --write-verification-metadata sha256 help --dry-run || (sleep 60s && ../gradlew --write-verification-metadata sha256 help --dry-run)))
 #    (cd ../checker-framework/framework && ../gradlew ainferTest)
 
