@@ -394,9 +394,9 @@ public final class Criteria {
     return criteria.toString();
   }
 
-  ///////////////////////////////////////////////////////////////////////////
-  /// Factory methods
-  ///
+  // ///////////////////////////////////////////////////////////////////////////
+  // Factory methods
+  //
 
   /**
    * Creates an "is" criterion: that a program element has the specified kind and name.
@@ -437,6 +437,7 @@ public final class Criteria {
    * @param exactMatch whether to match only in the class itself, not in its inner classes
    * @return an "in class" criterion
    */
+  // TODO: Should `name` be `@BinaryName`??
   public static final Criterion inClass(@ClassGetName String name, boolean exactMatch) {
     return new InClassCriterion(name, /* exactMatch= */ true);
   }
@@ -523,6 +524,13 @@ public final class Criteria {
     return new ReturnTypeCriterion(className, methodName);
   }
 
+  /**
+   * Creates an IsSigMethodCriterion.
+   *
+   * @param methodName the method name
+   * @return a new IsSigMethodCriterion
+   */
+  @SuppressWarnings("signature:argument") // likely bug; value used as both a method & a signature
   public static final Criterion isSigMethod(String methodName) {
     return new IsSigMethodCriterion(methodName);
   }

@@ -25,10 +25,10 @@ export PATH="$AFU/scripts:$JAVA_HOME/bin:$PATH"
 # if [ -d "/tmp/$USER/git-scripts" ] ; then
 #   (cd "/tmp/$USER/git-scripts" && (git pull -q || true)) > /dev/null 2>&1
 # else
-#   mkdir -p "/tmp/$USER" && git -C "/tmp/$USER" clone --filter=blob:none -q https://github.com/eisop-plume-lib/plume-scripts.git
+#   mkdir -p "/tmp/$USER" && git -C "/tmp/$USER" clone --depth=1 -q https://github.com/eisop-plume-lib/git-scripts.git
 # fi
 
-# checker-framework and its downstream tests
+# # checker-framework and its downstream tests
 # "/tmp/$USER/git-scripts/git-clone-related" eisop checker-framework "${CHECKERFRAMEWORK}"
 
 # (cd "${CHECKERFRAMEWORK}/checker" && ../gradlew ainferTest)
