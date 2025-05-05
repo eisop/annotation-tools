@@ -26,7 +26,7 @@ apply plugin: 'java'
 apply plugin: 'com.gradleup.shadow'
 
 group = 'io.github.eisop'
-version = '3.49.1-eisop1'
+version = '3.49.3-eisop1'
 
 java {
     // This test is for whether the Checker Framework supports (runs under) Java 8.
