@@ -66,7 +66,7 @@ public class ClassFileReader {
    * From the command line, read annotations from a class file and write them to an index file. Also
    * see the Anncat tool, which is more versatile (and which calls this as a subroutine).
    *
-   * <p>For usage information, supply the -h or --help option.
+   * <p>For usage information, supply the {@code -h} or {@code --help} option.
    *
    * <p>For programmatic access to this tool, use the read() methods instead.
    *
@@ -174,7 +174,9 @@ public class ClassFileReader {
    * @throws IOException if there is a problem reading from <code> fileName </code>
    */
   public static void read(AScene scene, String fileName) throws IOException {
-    read(scene, new FileInputStream(fileName));
+    try (FileInputStream fis = new FileInputStream(fileName)) {
+      read(scene, fis);
+    }
   }
 
   /**
